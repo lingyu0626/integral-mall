@@ -1,0 +1,37 @@
+<view class="page-address">
+  <block wx:if="{{list.length}}">
+    <scroll-view class="addr-scroll" scroll-y>
+      <view
+        class="addr-card {{choose_mode && selected_address_id == item.id ? 'active' : ''}}"
+        wx:for="{{list}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onTapChoose"
+      >
+        <view class="row-top">
+          <view class="name">{{item.receiver_name}}</view>
+          <view class="phone">{{item.receiver_phone}}</view>
+          <view class="tag-default" wx:if="{{item.is_default}}">默认</view>
+          <view class="tag-choose" wx:if="{{choose_mode}}">{{selected_address_id == item.id ? '已选择' : '点击选择'}}</view>
+        </view>
+        <view class="addr-text">{{item.province_name}}{{item.city_name}}{{item.district_name}}{{item.detail_address}}</view>
+
+        <view class="actions" wx:if="{{!choose_mode}}" catchtap="noop">
+          <view class="action" wx:if="{{!item.is_default}}" data-id="{{item.id}}" bindtap="onTapSetDefault">设为默认</view>
+          <view class="action" data-id="{{item.id}}" bindtap="onTapEdit">编辑</view>
+          <view class="action danger" data-id="{{item.id}}" bindtap="onTapDelete">删除</view>
+        </view>
+      </view>
+    </scroll-view>
+  </block>
+
+  <view wx:else class="empty-wrap">
+    <image class="empty-image" src="../../assets/empty/address-empty.png" mode="aspectFit" />
+    <view class="empty-text">{{loading ? '加载中...' : '暂无收货地址'}}</view>
+  </view>
+
+  <view class="bottom-actions">
+    <button class="btn-wechat" bindtap="onTapWechatAdd">微信添加地址</button>
+    <button class="btn-add" bindtap="onTapAdd">添加地址</button>
+  </view>
+</view>

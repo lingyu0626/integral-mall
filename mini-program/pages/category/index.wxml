@@ -1,0 +1,69 @@
+<view class="page-category">
+  <view class="top-area">
+    <view class="custom-nav" style="padding-top: {{status_bar_height}}px; height: {{nav_content_height}}px;">
+      <view class="custom-nav-title">碎片商城</view>
+    </view>
+
+    <view class="top-card">
+      <view class="score">剩余碎片 | <text>{{point_balance}}</text></view>
+      <view class="quick-row">
+        <view class="quick-item" bindtap="onTapPoints">
+          <image class="quick-icon" src="../../assets/category/points-income.png" mode="aspectFit" />
+          <text>碎片收支</text>
+        </view>
+        <view class="quick-item" bindtap="onTapMyExchange">
+          <image class="quick-icon" src="../../assets/category/my-exchange.png" mode="aspectFit" />
+          <text>我的兑换</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="search-row u-search-bar">
+    <image class="search-icon u-search-icon" src="../../assets/icons/search.png" mode="aspectFit" />
+    <input
+      class="search-input u-search-input"
+      value="{{keyword}}"
+      placeholder="搜索"
+      placeholder-style="color:#9ca3af;"
+      bindinput="onInputKeyword"
+      confirm-type="search"
+      bindconfirm="onTapSearch"
+    />
+  </view>
+
+  <view class="layout" style="height: {{layout_height}}px;">
+    <scroll-view class="left" scroll-y>
+      <view
+        class="cate-item {{active_category_id === item.id ? 'active' : ''}}"
+        wx:for="{{categories}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onTapCategory"
+      >
+        {{item.category_name}}
+      </view>
+    </scroll-view>
+
+    <scroll-view class="right" scroll-y>
+      <view id="rightContent" class="right-content">
+        <view class="sort-row">
+          <view class="sort-item {{sort_by === 'point_asc' ? 'active' : ''}}" data-sort="point_asc" bindtap="onTapSort">碎片低到高</view>
+          <view class="sort-item {{sort_by === 'point_desc' ? 'active' : ''}}" data-sort="point_desc" bindtap="onTapSort">碎片高到低</view>
+        </view>
+        <block wx:if="{{products.length}}">
+          <view class="goods-grid">
+            <view class="goods" wx:for="{{products}}" wx:key="id" data-id="{{item.id}}" bindtap="onTapDetail">
+              <view class="cover-wrap">
+                <image class="cover" src="{{item.main_image_url || 'https://dummyimage.com/320x320/2a3348/e8dfc3&text=Goods'}}" mode="aspectFill" lazy-load="{{true}}" />
+              </view>
+              <view class="name">{{item.product_name}}</view>
+              <view class="point">{{item.point_price}} <text>碎片</text></view>
+            </view>
+          </view>
+        </block>
+        <view wx:else class="empty">{{loading ? '加载中...' : '暂无商品'}}</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

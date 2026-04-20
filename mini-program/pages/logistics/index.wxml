@@ -1,0 +1,28 @@
+<view class="logistics-page">
+  <view class="provider-tip">{{provider_tip}}</view>
+
+  <view class="card company-card" wx:if="{{delivery}}">
+    <view class="company">{{delivery.company_name || delivery.delivery_company_name || delivery.express_company || '-'}}</view>
+    <view class="company-phone" wx:if="{{delivery.shipper_phone}}" bindtap="onTapCall">快递电话：{{delivery.shipper_phone}}</view>
+
+    <view class="row">
+      <view class="express-no">{{delivery.express_no || delivery.tracking_no || delivery.delivery_no || '-'}}</view>
+      <view class="copy-btn" bindtap="onTapCopyNo">复制</view>
+    </view>
+    <view class="address" wx:if="{{delivery.receiver_address}}">收货地址：{{delivery.receiver_address}}</view>
+  </view>
+
+  <view class="card">
+    <view class="title">物流轨迹</view>
+    <block wx:if="{{traces.length}}">
+      <view class="timeline-item {{index === 0 ? 'first' : ''}}" wx:for="{{traces}}" wx:key="index">
+        <view class="dot"></view>
+        <view class="content">
+          <view class="time">{{item.accept_time || '-'}}</view>
+          <view class="desc">{{item.accept_station || '-'}}</view>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty">{{loading ? '加载中...' : '暂无物流轨迹'}}</view>
+  </view>
+</view>

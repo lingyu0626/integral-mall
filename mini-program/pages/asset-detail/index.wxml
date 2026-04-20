@@ -1,0 +1,31 @@
+<view class="page-asset-detail" wx:if="{{asset}}">
+  <view class="card top-card">
+    <view class="head">
+      <image class="cover" src="{{asset.cover_url || 'https://dummyimage.com/180x180/f0f1f3/8b92a1&text=Asset'}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view class="meta">
+        <view class="name">{{asset.asset_name}}</view>
+        <view class="sub">类型：{{asset.asset_type_code}}</view>
+        <view class="sub">状态：{{asset.asset_status_code}}</view>
+        <view class="sub">数量：{{asset.quantity}}</view>
+        <view class="sub" wx:if="{{asset.expire_at}}">有效期至：{{asset.expire_at}}</view>
+      </view>
+    </view>
+    <view class="remark" wx:if="{{asset.remark}}">备注：{{asset.remark}}</view>
+    <button class="use-btn" loading="{{using}}" bindtap="onTapUse">立即使用</button>
+  </view>
+
+  <view class="card flow-card">
+    <view class="title">资产流水</view>
+    <block wx:if="{{flows.length}}">
+      <view class="flow-item" wx:for="{{flows}}" wx:key="id">
+        <view class="flow-main">{{item.flow_type_code}}</view>
+        <view class="flow-sub">数量变动：{{item.delta_qty}}</view>
+        <view class="flow-time">{{item.occurred_at}}</view>
+        <view class="flow-remark" wx:if="{{item.remark}}">{{item.remark}}</view>
+      </view>
+    </block>
+    <view wx:else class="empty">{{loading ? '加载中...' : '暂无流水记录'}}</view>
+  </view>
+</view>
+
+<view wx:else class="loading">{{loading ? '加载中...' : '暂无资产详情'}}</view>

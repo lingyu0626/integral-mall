@@ -1,0 +1,159 @@
+.page-order-detail {
+  padding: 16rpx;
+}
+
+.section {
+  margin-bottom: 14rpx;
+  padding: 16rpx;
+}
+
+.order-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #2a3342;
+  margin-bottom: 10rpx;
+}
+
+.row {
+  display: flex;
+  margin-top: 8rpx;
+}
+
+.label {
+  width: 132rpx;
+  color: #8b95a6;
+  font-size: 23rpx;
+}
+
+.value {
+  flex: 1;
+  color: #3a4351;
+  font-size: 23rpx;
+  word-break: break-all;
+}
+
+.status {
+  color: #2eb86f;
+  font-weight: 700;
+}
+
+.item {
+  display: flex;
+  column-gap: 12rpx;
+  margin-top: 10rpx;
+}
+
+.cover {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  background: #f0f2f6;
+}
+
+.meta {
+  flex: 1;
+}
+
+.name {
+  font-size: 26rpx;
+  color: #2b3342;
+  font-weight: 600;
+}
+
+.sub {
+  margin-top: 8rpx;
+  color: #919aaa;
+  font-size: 22rpx;
+}
+
+.point {
+  margin-top: 8rpx;
+  color: #ff5b3e;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.total-point {
+  margin-top: 12rpx;
+  text-align: right;
+  color: #ff5b3e;
+  font-size: 28rpx;
+  font-weight: 800;
+}
+
+.address-name {
+  color: #2d3644;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.address-text {
+  margin-top: 8rpx;
+  color: #626c7a;
+  font-size: 23rpx;
+}
+
+.flow-item {
+  margin-top: 10rpx;
+  padding: 10rpx;
+  border-radius: 10rpx;
+  background: #f7f9fc;
+}
+
+.flow-main {
+  color: #303948;
+  font-size: 24rpx;
+}
+
+.flow-time {
+  margin-top: 6rpx;
+  color: #8e98a9;
+  font-size: 21rpx;
+}
+
+.flow-remark {
+  margin-top: 6rpx;
+  color: #626c7b;
+  font-size: 22rpx;
+}
+
+.actions {
+  margin-top: 18rpx;
+  display: flex;
+  column-gap: 10rpx;
+}
+
+.btn {
+  flex: 1;
+  height: 74rpx;
+  border-radius: 37rpx;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn::after {
+  border: none;
+}
+
+.btn.danger {
+  background: #ff5b3e;
+  color: #ffffff;
+}
+
+.btn.ghost {
+  background: #f0f3f8;
+  color: #5f6a7b;
+}
+
+.loading {
+  margin-top: 120rpx;
+  text-align: center;
+  color: #9ea7b7;
+}

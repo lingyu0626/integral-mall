@@ -1,0 +1,64 @@
+<view class="page-order-detail" wx:if="{{order}}">
+  <view class="card section order-section">
+    <view class="row">
+      <view class="label">订单号</view>
+      <view class="value">{{order.order_no}}</view>
+    </view>
+    <view class="row">
+      <view class="label">状态</view>
+      <view class="value status">{{order.order_status_text}}</view>
+    </view>
+    <view class="row">
+      <view class="label">提交时间</view>
+      <view class="value">{{order.submit_at}}</view>
+    </view>
+    <view class="row" wx:if="{{order.user_remark}}">
+      <view class="label">用户备注</view>
+      <view class="value">{{order.user_remark}}</view>
+    </view>
+    <view class="row" wx:if="{{order.admin_remark}}">
+      <view class="label">后台备注</view>
+      <view class="value">{{order.admin_remark}}</view>
+    </view>
+  </view>
+
+  <view class="card section">
+    <view class="section-title">商品信息</view>
+    <view class="item" wx:for="{{items}}" wx:key="id">
+      <image class="cover" src="{{item.main_image_snapshot || 'https://dummyimage.com/140x140/f0f1f3/8b92a1&text=Goods'}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view class="meta">
+        <view class="name">{{item.product_name_snapshot}}</view>
+        <view class="sub">单价：{{item.unit_point_price}} 碎片 · 数量：{{item.quantity}}</view>
+        <view class="point">小计：{{item.total_point_amount}} 碎片</view>
+      </view>
+    </view>
+    <view class="total-point">合计：{{order.total_point_amount}} 碎片</view>
+  </view>
+
+  <view class="card section" wx:if="{{address_snapshot}}">
+    <view class="section-title">收货地址</view>
+    <view class="address-name">{{address_snapshot.receiver_name}} {{address_snapshot.receiver_phone}}</view>
+    <view class="address-text">{{address_snapshot.province_name}}{{address_snapshot.city_name}}{{address_snapshot.district_name}}{{address_snapshot.detail_address}}</view>
+  </view>
+
+  <view class="card section" wx:if="{{delivery}}">
+    <view class="section-title">物流信息</view>
+    <view class="row">
+      <view class="label">物流公司</view>
+      <view class="value">{{delivery.company_name || delivery.delivery_company_name || '-'}}</view>
+    </view>
+    <view class="row">
+      <view class="label">物流单号</view>
+      <view class="value">{{delivery.tracking_no || delivery.delivery_no || '-'}}</view>
+    </view>
+    <button class="btn ghost" wx:if="{{order.order_status_code === 'SHIPPED' || order.order_status_code === 'FINISHED'}}" bindtap="onTapLogistics">查看物流详情</button>
+  </view>
+
+  <view class="actions" wx:if="{{can_cancel || can_review_reject}}">
+    <button class="btn danger" wx:if="{{can_cancel}}" bindtap="onTapCancel">取消订单</button>
+    <button class="btn" wx:if="{{can_review_reject}}" bindtap="onTapAcceptReject">接受并重审</button>
+    <button class="btn danger" wx:if="{{can_review_reject}}" bindtap="onTapRefundReject">拒绝并退回碎片</button>
+  </view>
+</view>
+
+<view wx:else class="loading">{{loading ? '加载中...' : '暂无订单详情'}}</view>

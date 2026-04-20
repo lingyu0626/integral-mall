@@ -1,0 +1,100 @@
+<view class="profile-page">
+  <view class="profile-hero" wx:if="{{user}}">
+    <view class="profile-card">
+      <view class="user-card">
+        <view class="user-head">
+          <view class="avatar-wrap">
+            <image class="avatar" src="{{brand_avatar_url}}" mode="aspectFit" lazy-load="{{true}}" />
+          </view>
+          <view class="user-meta">
+            <view class="meta-line">背包ID：<text class="meta-value">{{backpack_id_text}}</text></view>
+            <view class="meta-line">碎片余额：<text class="meta-value point">{{summary.point_balance || 0}}</text></view>
+            <view class="meta-line">用户手机号：<text class="meta-value">{{user.phone || user.phone_masked || '--'}}</text></view>
+            <button
+              wx:if="{{!user.phone && !user.phone_masked}}"
+              class="phone-auth-btn"
+              open-type="getPhoneNumber"
+              bindgetphonenumber="onGetPhoneNumber"
+              loading="{{binding_phone}}"
+            >
+              手机号快捷登录
+            </button>
+          </view>
+        </view>
+      </view>
+      <view class="block-card order-card">
+        <view class="block-header">
+          <view class="block-title">我的订单</view>
+          <view class="block-more" bindtap="onTapOrderMore">更多</view>
+        </view>
+        <view class="order-grid">
+          <view class="order-item" bindtap="onTapOrderStatus" data-status="PENDING_AUDIT">
+            <image class="order-icon" src="../../assets/profile/order-pending.png" mode="aspectFit" />
+            <view class="order-badge" wx:if="{{(summary.pending_audit_count || 0) > 0}}">{{summary.pending_audit_count}}</view>
+            <view class="order-text">待审核</view>
+          </view>
+          <view class="order-item" bindtap="onTapOrderStatus" data-status="PENDING_SHIP">
+            <image class="order-icon" src="../../assets/profile/order-to-ship.png" mode="aspectFit" />
+            <view class="order-badge" wx:if="{{(summary.pending_ship_count || 0) > 0}}">{{summary.pending_ship_count}}</view>
+            <view class="order-text">待发货</view>
+          </view>
+          <view class="order-item" bindtap="onTapOrderStatus" data-status="SHIPPED">
+            <image class="order-icon" src="../../assets/profile/order-shipped.png" mode="aspectFit" />
+            <view class="order-badge" wx:if="{{(summary.shipped_count || 0) > 0}}">{{summary.shipped_count}}</view>
+            <view class="order-text">已发货</view>
+          </view>
+          <view class="order-item" bindtap="onTapOrderStatus" data-status="FINISHED">
+            <image class="order-icon" src="../../assets/profile/order-done.png" mode="aspectFit" />
+            <view class="order-badge" wx:if="{{(summary.finished_count || 0) > 0}}">{{summary.finished_count}}</view>
+            <view class="order-text">已完成</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="block-card menu-card">
+        <view
+          class="menu-item"
+          wx:for="{{menu_list}}"
+          wx:key="key"
+          data-key="{{item.key}}"
+          data-title="{{item.title}}"
+          data-qrcode-url="{{item.qrcode_url}}"
+          bindtap="onTapMenu"
+        >
+          <view class="menu-left">
+            <image class="menu-icon" src="{{item.icon}}" mode="aspectFit" />
+            <view class="menu-title">{{item.title}}</view>
+          </view>
+          <image class="menu-arrow" src="../../assets/profile/chevron-right.png" mode="aspectFit" />
+        </view>
+
+        <view class="menu-item menu-item-desc" wx:if="{{group_desc_visible}}">
+          <view class="menu-left">
+            <image class="menu-icon" src="../../assets/profile/menu-group.png" mode="aspectFit" />
+            <view class="menu-title">{{group_desc_text}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="profile-card user-card-login" wx:else>
+    <view class="user-login-tip">未登录，可先浏览，登录后可查看完整数据</view>
+    <button class="wx-login-btn" loading="{{login_ing}}" bindtap="onTapWxLogin">手机号快捷登录</button>
+  </view>
+
+  <view class="popup-mask" wx:if="{{group_qr_popup_visible}}" bindtap="onCloseGroupQrPopup">
+    <view class="popup-card" catchtap="noop">
+      <view class="popup-title">{{group_qr_popup_title}}</view>
+      <image
+        class="popup-qr"
+        src="{{group_qr_popup_url}}"
+        mode="aspectFit"
+        bindtap="onPreviewGroupQr"
+      />
+      <view class="popup-tip">点击二维码可放大查看</view>
+      <button class="popup-close" bindtap="onCloseGroupQrPopup">我知道了</button>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+</view>

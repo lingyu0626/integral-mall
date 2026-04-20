@@ -1,0 +1,37 @@
+<view class="page-community">
+  <view class="card section">
+    <view class="section-title">客服入口</view>
+    <view class="line">电话：{{service_contact.service_phone || service_contact.phone || '-'}}</view>
+    <view class="line">微信：{{service_contact.wechat || service_contact.wx_code || '-'}}</view>
+    <view class="line">说明：{{service_contact.remark || service_contact.contact_desc || '有问题请联系人工客服'}}</view>
+    <view class="btn-row">
+      <button class="btn ghost" bindtap="onTapCallService">拨打电话</button>
+      <button class="btn" bindtap="onTapCopyServiceWx">复制微信号</button>
+    </view>
+  </view>
+
+  <view class="card section" wx:if="{{service_hours.length}}">
+    <view class="section-title">服务时段</view>
+    <view class="line" wx:for="{{service_hours}}" wx:key="id">{{item.item_name || item.dict_item_name || item.item_value || '-'}}</view>
+  </view>
+
+  <view class="card section">
+    <view class="section-title">官方群资源</view>
+    <block wx:if="{{group_resources.length}}">
+      <view class="resource-item" wx:for="{{group_resources}}" wx:key="id">
+        <view class="left">
+          <view class="name">{{item.resource_name}}</view>
+          <view class="sub">状态：{{item.status_code}}</view>
+          <view class="sub">兑换碎片：{{item.point_price}}</view>
+        </view>
+        <button class="btn mini" data-id="{{item.id}}" data-url="{{item.qr_code_url}}" bindtap="onTapPreviewResource">查看二维码</button>
+      </view>
+    </block>
+    <view wx:else class="empty">{{loading ? '加载中...' : '暂无群资源'}}</view>
+  </view>
+
+  <view class="card section" wx:if="{{public_configs.length}}">
+    <view class="section-title">系统公告</view>
+    <view class="line" wx:for="{{public_configs}}" wx:key="id">{{item.config_name || item.config_key}}：{{item.config_value || item.config_content || '-'}}</view>
+  </view>
+</view>

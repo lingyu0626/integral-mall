@@ -1,0 +1,70 @@
+<view class="page-detail" wx:if="{{product}}">
+  <view class="gallery-card">
+    <swiper
+      wx:if="{{product.image_urls && product.image_urls.length}}"
+      class="banner-swiper"
+      current="{{banner_current}}"
+      circular="{{product.image_urls.length > 1}}"
+      autoplay="{{false}}"
+      bindchange="onBannerChange"
+    >
+      <swiper-item wx:for="{{product.image_urls}}" wx:key="*this">
+        <image class="banner" src="{{item}}" mode="aspectFill" lazy-load="{{true}}" />
+      </swiper-item>
+    </swiper>
+    <image wx:else class="banner" src="{{product.main_image_url || 'https://dummyimage.com/720x720/242f46/f2e6c8&text=Product'}}" mode="aspectFill" lazy-load="{{true}}" />
+    <view class="pager">
+      {{product.image_urls && product.image_urls.length ? banner_current + 1 : 1}}/{{product.image_urls && product.image_urls.length ? product.image_urls.length : 1}}
+    </view>
+  </view>
+
+  <view class="info-card">
+    <view class="price-row">
+      <text class="price-value">{{product.point_price}}</text>
+      <text class="price-unit">碎片</text>
+    </view>
+    <view class="name">{{product.product_name}}</view>
+    <view class="sku-area" wx:if="{{product.sku_list.length}}">
+      <view class="sku-title">规格</view>
+      <view class="sku-list">
+        <view
+          class="sku-tag {{item.id == product.sku_id ? 'active' : ''}} {{item.selectable ? '' : 'disabled'}}"
+          wx:for="{{product.sku_list}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          data-index="{{index}}"
+          data-selectable="{{item.selectable}}"
+          bindtap="onTapSku"
+        >
+          {{item.sku_name}}
+        </view>
+      </view>
+    </view>
+    <view class="stock-text">库存：{{product.stock_available}}</view>
+  </view>
+
+  <view class="detail-card">
+    <view class="section-title">详情</view>
+    <view class="detail-text">{{product.detail_text}}</view>
+  </view>
+
+  <view class="bottom-safe-space"></view>
+
+  <view class="bottom-bar">
+    <view class="bottom-main">
+      <view class="bar-icon-btn" bindtap="onTapHome">
+        <image class="bar-icon" src="../../assets/tabbar/home.png" mode="aspectFit" />
+        <text>首页</text>
+      </view>
+
+      <view class="bar-icon-btn" bindtap="onTapBackpack">
+        <image class="bar-icon" src="../../assets/tabbar/cart.png" mode="aspectFit" />
+        <text>背包</text>
+      </view>
+
+      <button class="exchange-btn" bindtap="onTapExchange">立即兑换</button>
+    </view>
+  </view>
+</view>
+
+<view wx:else class="loading">{{loading ? '加载中...' : '暂无详情'}}</view>

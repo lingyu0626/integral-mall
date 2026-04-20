@@ -1,0 +1,55 @@
+<view class="wish-page">
+  <view class="card form-card">
+    <view class="title">留言意向商品</view>
+    <view class="sub-title">填写商品名称或留言内容，可上传商品图片，后台上架后会通知您</view>
+
+    <view class="field">
+      <view class="field-label">商品名称</view>
+      <input class="input" placeholder="请输入想要兑换的商品名称" value="{{wish_title}}" bindinput="onInputTitle" />
+    </view>
+
+    <view class="field">
+      <view class="field-label">留言内容</view>
+      <textarea class="textarea" maxlength="150" placeholder="例如：希望是某某品牌某某规格" value="{{wish_message}}" bindinput="onInputMessage" />
+    </view>
+
+    <view class="field">
+      <view class="field-label">上传图片（可选，最多9张）</view>
+      <view class="uploader-grid">
+        <view class="uploader has-image" wx:for="{{image_urls}}" wx:key="*this">
+          <image class="preview" src="{{item}}" mode="aspectFill" />
+          <view class="remove-btn" data-index="{{index}}" catchtap="onRemoveImage">×</view>
+        </view>
+        <view wx:if="{{image_urls.length < 9}}" class="uploader uploader-add" bindtap="onChooseImage">
+          <view class="uploader-placeholder">{{choosing ? '处理中...' : '+ 选择图片'}}</view>
+        </view>
+      </view>
+      <view class="image-actions" wx:if="{{image_urls.length}}">
+        <text class="image-count">{{image_urls.length}}/9</text>
+        <text class="remove-text" bindtap="onClearImages">清空图片</text>
+      </view>
+    </view>
+
+    <button class="submit-btn" bindtap="onSubmit" loading="{{submitting}}">提交留言</button>
+  </view>
+
+  <view class="card list-card">
+    <view class="title">我的留言记录</view>
+    <block wx:if="{{list.length}}">
+      <view class="record" wx:for="{{list}}" wx:key="id">
+        <view class="record-head">
+          <view class="record-title">{{item.wish_title}}</view>
+          <view class="status status-{{item.status_code}}">{{item.status_text}}</view>
+        </view>
+        <view class="record-msg" wx:if="{{item.wish_message}}">{{item.wish_message}}</view>
+        <view class="record-images" wx:if="{{item.image_urls && item.image_urls.length}}">
+          <image class="record-image" wx:for="{{item.image_urls}}" wx:key="*this" src="{{item}}" mode="aspectFill" lazy-load="{{true}}" />
+        </view>
+        <view class="record-note" wx:if="{{item.decision_note}}">处理备注：{{item.decision_note}}</view>
+        <view class="record-note" wx:if="{{item.notify_content}}">通知：{{item.notify_content}}</view>
+        <view class="record-time">{{item.created_at}}</view>
+      </view>
+    </block>
+    <view wx:else class="empty">{{loading ? '加载中...' : '暂无留言记录'}}</view>
+  </view>
+</view>

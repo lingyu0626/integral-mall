@@ -1,0 +1,40 @@
+<view class="page-home">
+  <swiper class="hero-swiper card" indicator-dots circular autoplay interval="3200" duration="360" wx:if="{{banner_list.length}}">
+    <block wx:for="{{banner_list}}" wx:key="*this">
+      <swiper-item>
+        <image class="hero-image" src="{{item}}" mode="aspectFill" lazy-load="{{true}}" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="search-bar u-search-bar">
+    <image class="search-icon u-search-icon" src="../../assets/icons/search.png" mode="aspectFit" />
+    <input
+      class="search-input u-search-input"
+      placeholder="搜索"
+      placeholder-style="color:#8f949e;"
+      value="{{keyword}}"
+      bindinput="onInputKeyword"
+      confirm-type="search"
+      bindconfirm="onTapSearch"
+    />
+  </view>
+
+  <view class="wish-entry" bindtap="onTapWish">
+    <view class="wish-title">留言意向商品</view>
+    <view class="wish-sub">可上传商品图片和留言，后台上架后会通知您</view>
+  </view>
+
+  <view class="goods-grid">
+    <block wx:if="{{list.length}}">
+      <view class="goods-item" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onTapDetail">
+        <view class="goods-cover-wrap">
+          <image class="goods-cover" src="{{item.main_image_url || 'https://dummyimage.com/320x320/f0f1f3/8b92a1&text=Goods'}}" mode="aspectFill" lazy-load="{{true}}" />
+        </view>
+        <view class="goods-name">{{item.product_name}}</view>
+        <view class="goods-point text-price">{{item.point_price}} 碎片</view>
+      </view>
+    </block>
+    <view wx:else class="empty">{{loading ? '加载中...' : empty_text}}</view>
+  </view>
+</view>

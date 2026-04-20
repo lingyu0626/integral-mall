@@ -1,0 +1,24 @@
+:root {
+  font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  color: #1f2329;
+  background: #f3f5f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #f3f5f9;
+}
+
+.n-card > .n-card-header .n-card-header__main {
+  font-weight: 700;
+}

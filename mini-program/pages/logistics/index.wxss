@@ -1,0 +1,127 @@
+.logistics-page {
+  min-height: 100vh;
+  background: #f3f4f6;
+  padding: 14rpx;
+  box-sizing: border-box;
+}
+
+.provider-tip {
+  color: #8d97a8;
+  font-size: 22rpx;
+  margin: 6rpx 4rpx 10rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 16rpx 18rpx;
+  margin-bottom: 12rpx;
+}
+
+.company-card .company {
+  color: #1f2b3c;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.company-card .company-phone {
+  margin-top: 6rpx;
+  color: #5a86c7;
+  font-size: 24rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-top: 14rpx;
+}
+
+.express-no {
+  flex: 1;
+  color: #333b4d;
+  font-size: 31rpx;
+  word-break: break-all;
+}
+
+.copy-btn {
+  width: 88rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 25rpx;
+  text-align: center;
+  color: #828b98;
+  font-size: 22rpx;
+  background: #f3f5f8;
+}
+
+.address {
+  margin-top: 12rpx;
+  color: #565f6f;
+  font-size: 24rpx;
+  line-height: 1.45;
+}
+
+.title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #1f2b3c;
+  margin-bottom: 10rpx;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding: 6rpx 0 12rpx 6rpx;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 10rpx;
+  top: 18rpx;
+  bottom: -8rpx;
+  width: 2rpx;
+  background: #e6ebf3;
+}
+
+.timeline-item:last-child::before {
+  display: none;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #b7becb;
+  margin-top: 10rpx;
+  margin-right: 14rpx;
+  flex-shrink: 0;
+}
+
+.timeline-item.first .dot {
+  background: #29bb71;
+}
+
+.content {
+  flex: 1;
+}
+
+.time {
+  color: #7f8896;
+  font-size: 22rpx;
+}
+
+.desc {
+  margin-top: 6rpx;
+  color: #4c5565;
+  font-size: 25rpx;
+  line-height: 1.5;
+}
+
+.empty {
+  color: #97a0af;
+  text-align: center;
+  padding: 40rpx 0;
+  font-size: 24rpx;
+}

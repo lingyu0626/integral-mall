@@ -1,0 +1,54 @@
+server:
+  port: 8083
+
+spring:
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+  redis:
+    host: 154.12.88.131
+    port: 6379
+    password: lingyu
+    timeout: 3000ms
+  datasource:
+    url: jdbc:mysql://154.12.88.131:3306/integral_mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: "Qq.864617155"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mall:
+  # 强制后端必须连上MySQL，不再降级到纯内存
+  require-mysql: true
+  # 关闭业务模拟种子数据；空库时仅初始化最小系统数据（管理员账号）
+  bootstrap-mock-data: false
+  # 禁用本地快照回退，统一以MySQL为准
+  disable-local-snapshot: true
+  # 媒体/文件上传落盘目录（相对路径基于 mall-api 启动目录）
+  file-storage-dir: ./data/uploads
+  # 管理端业务状态本地快照（MySQL不可用时用于重启恢复）
+  admin-state-file: ./data/admin-business-state-v1.json
+  # 小程序微信登录（官方授权）配置
+  wechat:
+    appid: wxde91eb7837ebb972
+    # 请替换为你的小程序 secret（生产环境建议走环境变量覆盖）
+    secret: "ff036a00111376dc13ba20c77a44d9df"
+  jwt:
+    secret: "mall-jwt-change-this-secret-in-prod"
+    app-access-expire-seconds: 259200
+    app-refresh-expire-seconds: 2592000
+    admin-access-expire-seconds: 43200
+    admin-refresh-expire-seconds: 604800
+  security:
+    jwt-enabled: true
+    allow-legacy-token: false
+  logistics:
+    kdniao:
+      enabled: true
+      # 快递鸟用户ID（EBusinessID）
+      business-id: "1915755"
+      # 快递鸟 API Key（你提供的 key 可放这里）
+      api-key: "0f201081-2d58-4a7d-890b-6e627973f544"
+      api-url: "https://api.kdniao.com/api/dist"
+      # 请改成你的公网可访问地址（必须与快递鸟后台回调地址一致）
+      callback-url: "https://shangcheng.20060626.xyz/api/v1/admin/logistics/kdniao/callback"
+      timeout-ms: 8000

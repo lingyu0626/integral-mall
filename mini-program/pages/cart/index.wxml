@@ -1,0 +1,48 @@
+<view class="page-cart">
+  <view class="filter-row">
+    <view class="filter-item left" bindtap="onTapFilterLevel">排序：{{sort_options[sort_index].label}}▽</view>
+    <view class="filter-item right">碎片余额：{{point_balance}}</view>
+  </view>
+
+  <block wx:if="{{list.length}}">
+    <view class="asset-list">
+      <view class="asset-card" wx:for="{{list}}" wx:key="product_id">
+        <view class="asset-row" data-id="{{item.product_id}}" bindtap="onTapDetail">
+          <image class="cover" src="{{item.main_image_url || 'https://dummyimage.com/140x140/f0f1f3/8b92a1&text=Goods'}}" mode="aspectFill" lazy-load="{{true}}" />
+          <view class="meta">
+            <view class="name">{{item.product_name}}</view>
+            <view class="sub">单价：{{item.point_price}} 碎片</view>
+            <view class="sub">数量：{{item.quantity}}</view>
+            <view class="sub">合计：{{item.total_point_amount}} 碎片</view>
+            <view class="sub">加入时间：{{item.added_at}}</view>
+          </view>
+        </view>
+        <view class="asset-foot">
+          <view class="actions">
+            <button class="btn ghost" data-id="{{item.product_id}}" bindtap="onTapRemove">移除</button>
+            <button class="btn" data-id="{{item.product_id}}" data-sku-id="{{item.sku_id}}" bindtap="onTapExchange">去兑换</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view wx:else class="empty-wrap">
+    <image class="empty-image" src="../../assets/empty/backpack-empty.png" mode="aspectFit" />
+    <view class="empty-text">背包还是空的，快去逛逛吧</view>
+  </view>
+
+  <view class="level-mask" wx:if="{{show_sort_sheet}}" bindtap="onCancelSortSheet" catchtouchmove="noop">
+    <view class="level-panel" catchtap="noop">
+      <view class="level-toolbar">
+        <view class="toolbar-btn cancel" bindtap="onCancelSortSheet">取消</view>
+        <view class="toolbar-btn confirm" bindtap="onConfirmSortSheet">确定</view>
+      </view>
+      <picker-view class="level-picker" indicator-style="height: 82rpx;" value="{{[temp_sort_index]}}" bindchange="onSortPickerChange">
+        <picker-view-column>
+          <view class="picker-item" wx:for="{{sort_options}}" wx:key="value">{{item.label}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+</view>

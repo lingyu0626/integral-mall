@@ -1,0 +1,64 @@
+<view class="page-confirm" wx:if="{{product}}">
+  <view class="card product-card">
+    <image class="cover" src="{{product.main_image_url || 'https://dummyimage.com/220x220/f0f1f3/8b92a1&text=Goods'}}" mode="aspectFill" lazy-load="{{true}}" />
+    <view class="meta">
+      <view class="name">{{product.product_name}}</view>
+      <view class="point">{{product.point_price}} 碎片</view>
+      <view class="hint">数量：1</view>
+      <view class="hint">库存：{{product.stock_available}}</view>
+      <view class="sku-block" wx:if="{{product.sku_list.length}}">
+        <view class="sku-title">选择规格</view>
+        <view class="sku-list">
+          <view
+            class="sku-tag {{item.id == selected_sku_id ? 'active' : ''}} {{item.selectable ? '' : 'disabled'}}"
+            wx:for="{{product.sku_list}}"
+            wx:key="id"
+            data-id="{{item.id}}"
+            data-selectable="{{item.selectable}}"
+            bindtap="onTapSelectSku"
+          >
+            {{item.sku_name}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card section-card" wx:if="{{preview}}">
+    <view class="section-title">兑换预检</view>
+    <view class="row">可兑换：{{preview.can_exchange ? '是' : '否'}}</view>
+    <view class="row">账户碎片：{{preview.point_balance}}</view>
+    <view class="row">所需碎片：{{preview.required_point}}</view>
+    <view class="row">说明：{{preview.reason}}</view>
+  </view>
+
+  <view class="card section-card">
+    <view class="section-head">
+      <view class="section-title">收货地址</view>
+      <view class="link" bindtap="onTapGotoAddress">管理地址</view>
+    </view>
+
+    <block wx:if="{{selected_address}}">
+      <view class="addr-item active">
+        <view class="addr-top">
+          <view class="addr-name">{{selected_address.receiver_name}}</view>
+          <view class="addr-phone">{{selected_address.receiver_phone}}</view>
+          <view class="default-tag" wx:if="{{selected_address.is_default}}">默认</view>
+        </view>
+        <view class="addr-text">{{selected_address.province_name}}{{selected_address.city_name}}{{selected_address.district_name}}{{selected_address.detail_address}}</view>
+      </view>
+    </block>
+    <view wx:else class="empty" bindtap="onTapGotoAddress">暂无地址，请先去管理地址新增</view>
+  </view>
+
+  <view class="card section-card">
+    <view class="section-title">备注（选填）</view>
+    <textarea class="remark" maxlength="120" value="{{user_remark}}" placeholder="给商家留言..." bindinput="onInputRemark" />
+  </view>
+
+  <button class="submit-btn" loading="{{submitting}}" disabled="{{submitting || loading}}" bindtap="onTapSubmitExchange">
+    {{submitting ? '提交中...' : '确认提交兑换'}}
+  </button>
+</view>
+
+<view wx:else class="loading">{{loading ? '加载中...' : '暂无数据'}}</view>

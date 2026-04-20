@@ -1,0 +1,150 @@
+.page-address {
+  min-height: 100vh;
+  background: #eceef2;
+  position: relative;
+}
+
+.addr-scroll {
+  height: calc(100vh - 170rpx - env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  padding: 18rpx;
+}
+
+.addr-card {
+  margin-bottom: 14rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 20rpx 18rpx;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+
+.addr-card.active {
+  border-color: #36cb79;
+  background: #f4fcf8;
+}
+
+.row-top {
+  display: flex;
+  align-items: center;
+  column-gap: 12rpx;
+}
+
+.name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #2d333e;
+}
+
+.phone {
+  font-size: 24rpx;
+  color: #7f8795;
+}
+
+.tag-default {
+  margin-left: auto;
+  height: 38rpx;
+  padding: 0 14rpx;
+  border-radius: 20rpx;
+  background: #ebf9f1;
+  color: #30bc70;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-choose {
+  margin-left: auto;
+  font-size: 22rpx;
+  color: #2db76f;
+}
+
+.addr-text {
+  margin-top: 12rpx;
+  color: #3c4351;
+  font-size: 25rpx;
+  line-height: 1.5;
+}
+
+.actions {
+  margin-top: 16rpx;
+  display: flex;
+  column-gap: 12rpx;
+}
+
+.action {
+  flex: 1;
+  height: 56rpx;
+  border-radius: 12rpx;
+  background: #f5f7fa;
+  color: #5d6675;
+  font-size: 23rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action.danger {
+  background: #fff2ef;
+  color: #ff5b3e;
+}
+
+.empty-wrap {
+  min-height: calc(100vh - 230rpx - env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-image {
+  width: 218rpx;
+  height: 218rpx;
+}
+
+.empty-text {
+  margin-top: 20rpx;
+  color: #888f99;
+  font-size: 31rpx;
+}
+
+.bottom-actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 128rpx;
+  padding: 14rpx 20rpx calc(14rpx + env(safe-area-inset-bottom));
+  background: #eceef2;
+  display: flex;
+  column-gap: 18rpx;
+  box-sizing: border-box;
+}
+
+.btn-wechat,
+.btn-add {
+  flex: 1;
+  height: 76rpx;
+  border-radius: 38rpx;
+  color: #ffffff;
+  font-size: 34rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn-wechat {
+  background: #ff1208;
+}
+
+.btn-add {
+  background: linear-gradient(90deg, #62deb3 0%, #36cb79 100%);
+}
+
+.btn-wechat::after,
+.btn-add::after {
+  border: none;
+}

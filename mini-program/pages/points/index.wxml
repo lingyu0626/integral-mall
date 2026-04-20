@@ -1,0 +1,26 @@
+<view class="page-points">
+  <block wx:if="{{list.length}}">
+    <view class="ledger-list">
+      <view class="ledger-item" wx:for="{{list}}" wx:key="id">
+        <view class="left">
+          <view class="biz">{{item.project_text || item.biz_type_text}}</view>
+          <view class="detail" wx:if="{{item.detail_text}}">{{item.detail_text}}</view>
+          <view class="scene">{{item.biz_type_text}}</view>
+          <view class="time">{{item.occurred_at}}</view>
+          <view class="remark" wx:if="{{item.remark && item.biz_type_code !== 'MANUAL_ADJUST' && !item.has_hit_summary}}">备注：{{item.remark}}</view>
+        </view>
+        <view class="right">
+          <view class="amount {{item.is_income ? 'income' : 'expense'}}">{{item.is_income ? '+' : ''}}{{item.change_amount}}</view>
+          <view class="after">余额 {{item.balance_after}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="load-more" wx:if="{{has_more}}">{{loading_more ? '加载更多...' : '上拉加载更多'}}</view>
+  </block>
+
+  <view wx:else class="empty-wrap">
+    <image class="empty-image" src="../../assets/empty/points-empty.png" mode="aspectFit" />
+    <view class="empty-text">{{loading ? '加载中...' : '暂无记录'}}</view>
+  </view>
+</view>

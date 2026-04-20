@@ -1,0 +1,28 @@
+server:
+  port: 18083
+
+spring:
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/integral_mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mall:
+  require-mysql: false
+  bootstrap-mock-data: true
+  disable-local-snapshot: false
+  file-storage-dir: ./data/uploads
+  admin-state-file: ./data/admin-business-state-v1.json
+  wechat:
+    appid: wx-test-appid
+    secret: wx-test-secret
+    mock-enabled: true
+  jwt:
+    secret: test-jwt-secret
+  security:
+    jwt-enabled: true
+    allow-legacy-token: false

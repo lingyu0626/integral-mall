@@ -1,0 +1,74 @@
+page {
+  min-height: 100%;
+  background: #f4f5f7;
+  color: #222222;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 18rpx;
+  box-shadow: 0 8rpx 20rpx rgba(15, 22, 39, 0.05);
+}
+
+.btn-main {
+  border-radius: 999rpx;
+  border: none;
+  background: #ffffff;
+  color: #30b86f;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 24rpx;
+}
+
+.btn-accent {
+  border-radius: 999rpx;
+  border: none;
+  background: #ff5b3e;
+  color: #ffffff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 24rpx;
+}
+
+.btn-main::after,
+.btn-accent::after {
+  border: none;
+}
+
+.text-price {
+  color: #ff5b3e;
+  font-weight: 700;
+}
+
+.u-search-bar {
+  background: #e8ebef;
+  border-radius: 32rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.u-search-icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.u-search-input {
+  flex: 1;
+  font-size: 30rpx;
+  color: #676d78;
+  height: 64rpx;
+  line-height: 64rpx;
+}

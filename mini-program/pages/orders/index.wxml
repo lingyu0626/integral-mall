@@ -1,0 +1,50 @@
+<view class="page-orders">
+  <view class="tabs">
+    <view
+      class="tab-item {{active_tab === item.key ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="onTapTab"
+    >
+      {{item.label}}
+      <text class="tab-count" wx:if="{{item.count > 0}}">{{item.count}}</text>
+    </view>
+  </view>
+
+  <block wx:if="{{list.length}}">
+    <view class="order-list">
+      <view class="order-card" wx:for="{{list}}" wx:key="id">
+        <view class="order-head">
+          <view class="order-no">订单号：{{item.order_no}}</view>
+          <view class="status">{{item.order_status_text}}</view>
+        </view>
+
+        <view class="goods-row" data-id="{{item.id}}" bindtap="onTapDetail">
+          <image class="cover" src="{{item.main_image_snapshot || 'https://dummyimage.com/140x140/f0f1f3/8b92a1&text=Order'}}" mode="aspectFill" lazy-load="{{true}}" />
+          <view class="goods-meta">
+            <view class="name">{{item.product_name_snapshot}}</view>
+            <view class="sub">数量：{{item.total_item_count}}</view>
+            <view class="point">{{item.total_point_amount}} 碎片</view>
+          </view>
+        </view>
+
+        <view class="order-foot">
+          <view class="time">下单时间：{{item.submit_at}}</view>
+          <view class="actions">
+            <button class="btn ghost" wx:if="{{item.can_cancel}}" data-id="{{item.id}}" data-status="{{item.order_status_code}}" bindtap="onTapCancel">取消订单</button>
+            <button class="btn ghost" wx:if="{{item.order_status_code === 'SHIPPED'}}" data-id="{{item.id}}" bindtap="onTapLogistics">查看物流</button>
+            <button class="btn" data-id="{{item.id}}" bindtap="onTapDetail">查看详情</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="load-more" wx:if="{{has_more}}">{{loading_more ? '加载更多...' : '上拉加载更多'}}</view>
+  </block>
+
+  <view wx:else class="empty-wrap">
+    <image class="empty-image" src="../../assets/empty/orders-empty.png" mode="aspectFit" />
+    <view class="empty-text">{{loading ? '加载中...' : '暂无订单'}}</view>
+  </view>
+</view>

@@ -1,0 +1,48 @@
+<view class="page-address-edit">
+  <view class="quick-card">
+    <textarea
+      class="quick-input"
+      placeholder="复制粘贴收货人姓名、联系方式、收货地址，可快速识别您的收货信息"
+      placeholder-class="quick-placeholder"
+      value="{{quick_text}}"
+      bindinput="onInputQuick"
+    />
+    <button class="quick-btn" bindtap="onTapRecognize">识别</button>
+  </view>
+
+  <view class="form-card">
+    <view class="row">
+      <view class="label">收货人</view>
+      <input class="input" value="{{form.receiver_name}}" data-field="receiver_name" placeholder="请输入收货人姓名" bindinput="onInputField" />
+    </view>
+    <view class="row">
+      <view class="label">联系方式</view>
+      <input class="input" value="{{form.receiver_phone}}" data-field="receiver_phone" placeholder="请输入联系方式" maxlength="11" type="number" bindinput="onInputField" />
+    </view>
+
+    <view class="row">
+      <view class="label">选择区域</view>
+      <picker class="picker-value-wrap" mode="region" value="{{region}}" bindchange="onPickRegion">
+        <view class="picker-value {{region.length ? 'picked' : ''}}">{{region.length ? region[0] + region[1] + region[2] : '请选择'}}</view>
+      </picker>
+      <image class="picker-arrow" src="../../assets/profile/chevron-right.png" mode="aspectFit" />
+    </view>
+
+    <view class="row no-border">
+      <view class="label">详细地址</view>
+      <input class="input" value="{{form.detail_address}}" data-field="detail_address" placeholder="请输入详细地址" bindinput="onInputField" />
+    </view>
+  </view>
+
+  <view class="default-card">
+    <view class="default-label">设为默认地址</view>
+    <view class="default-switch {{form.is_default ? 'on' : ''}}" bindtap="onToggleDefault">
+      <view class="switch-dot"></view>
+      <view class="switch-mark">{{form.is_default ? '✓' : '×'}}</view>
+    </view>
+  </view>
+
+  <button class="save-btn" loading="{{submitting}}" disabled="{{submitting || loading}}" bindtap="onTapSave">
+    {{submitting ? '保存中...' : '保存'}}
+  </button>
+</view>
